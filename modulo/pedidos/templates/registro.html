@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es-mx" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #37eb9c, rgba(70, 120, 90, 0.7));
+        }
+        
+        .registro-container {
+            max-width: 400px;
+            width: 100%;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #007bff;
+        }
+        
+        .registro-encabezado {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .circulo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;      /* Ajusta el tamaño del círculo */
+            height: 80px;     /* Ajusta el tamaño del círculo */
+            border: solid 2px black;
+            border-radius: 50%;
+            background-color: green;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .fa-user-plus {
+            color: black;  /* Color del icono dentro del círculo */
+            font-size: 45px;   /* Ajusta el tamaño del ícono si es necesario */
+            margin-top: 45px;
+            margin-bottom: 45px;
+        }
+        
+        .btn {
+            border: solid 2px;
+            border-color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <!--Contenedor registro-->
+    <div class="registro-container">
+        <div class="registro-encabezado">
+            <h3>
+                <div class="circulo">
+                    <!-- Icono de Bootstrap dentro del círculo -->
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <br>Registro</h3>
+        </div>
+        
+        <form method="POST" action="/registrarUsuario/">
+            {% csrf_token %}
+            
+            <!--Nombre-->
+            <div class="mb-3">
+                <label for="txtNombre" class="form-label"><i class="fas fa-user"></i> Nombre Completo</label>
+                <input type="text" class="form-control" id="txtNombre" name="txtNombre" placeholder="Nombre completo" required>
+            </div>
+            
+            <!--Correo electrónico -->
+            <div class="mb-3">
+                <label for="txtCuenta" class="form-label"><i class="fas fa-envelope"></i> Cuenta</label>
+                <input type="email" class="form-control" id="txtCuenta" name="txtCuenta" placeholder="correo@dominio.com" required>
+            </div>
+    
+            <!--Contraseña-->
+            <div class="mb-3">
+                <label for="txtContrasena" class="form-label"><i class="fas fa-lock"></i> Contraseña</label>
+                <input type="password" class="form-control" id="txtContrasena" name="txtContrasena" placeholder="Ingrese su contraseña" required>
+            </div>
+            
+            <!--Rol-->
+            <div class="mb-3">
+                <label for="ddlRol" class="form-label"><i class="fas fa-users"></i> Rol</label>
+                <select class="form-control" id="ddlRol" name="ddlRol" required>
+                    <option value="mesero">Mesero</option>
+                    <option value="chef">Chef</option>
+                </select>
+            </div>
+            
+            <!-- Botón de registro -->
+            <button type="submit" class="btn btn-success w-100"> Registrarse</button>
+            
+            <!-- Enlace para redirigir al inicio de sesión -->
+            <p class="text-center mt-3">
+                <a href="{% url 'login' %}">¿Ya tienes cuenta? Inicia sesión</a>
+            </p>
+        </form>
+    </div>
+    <!--Fin de contenedor registro-->
+
+    <!--Bootstrap JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>
+

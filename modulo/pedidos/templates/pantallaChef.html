@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es-mx" translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef</title>
+
+    <!-- Bootstrap-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--Bootstrap iconos-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Alinea el contenido al centro horizontalmente */
+            min-height: 100vh;
+            background: linear-gradient(180deg, #37eb9c, rgba(70, 120, 90, 0.7));
+            margin: 0;
+            font-size: 10px !important;
+        }
+
+        /* Contenedor principal que envuelve los dos contenedores */
+        .contenedor-principal {
+            width: 100%;
+            max-width: 1300px; /* Ajusta el ancho máximo del contenedor */
+            display: flex;
+            flex-direction: column; /* Alinea los contenedores verticalmente */
+            gap: 0.5rem; /* Espacio entre los contenedores */
+            margin-top: 0px;
+            padding: 1rem; /* Padding en ambos lados para darle margen al contenedor */
+        }
+
+        .pantallaChef-container {
+            width: 100%; /* Hace que los contenedores se ajusten al ancho disponible */
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            margin-bottom: 1rem; /* Separación entre los dos contenedores */
+            font-size: 15px !important;
+            flex-grow: 0;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #007bff;
+        }
+
+        .pantallaChef-encabezado {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            border: solid 2px;
+            border-color: black;
+        }
+
+        hr {
+            border: 0;
+            border-top: 3px solid #000;
+        }
+
+        .pantallaChef-container .pantallaChef-encabezado .col-md-4 {
+            border-left: 3px solid #aabbb3;
+        }
+
+        .caja-usuario {
+            max-width: 220px;
+            width: 100%;
+            font-size: 15px;
+        }
+
+        .registro-container {
+            width: 100%;
+        }
+
+        #txtAceptado {
+            display: none;
+        }
+
+    </style>
+
+
+<body>
+    <!-- Contenedor principal-->
+    <div class="contenedor-principal">
+
+        <!-- Primer contenedor-->
+        <div class="pantallaChef-container caja-usuario">
+            <table>
+                <div class="txt-caja-usuario">
+                    <tr>
+                        <th><i class="bi bi-person-circle fs-2"></i></th>
+                        <th class="fs-4">&nbsp; CHEF</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>&nbsp;&nbsp;<a href="{% url 'login' %}" class="btn btn-info btn-sm"><i class="bi bi-box-arrow-left fs-5"></i><b>&nbsp;Cerrar sesión</b></a></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>&nbsp;&nbsp;<a href="" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i><b>&nbsp;Editar cuenta</b></a> </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>&nbsp;&nbsp;<a href="{% url 'eliminarUsuario' %}" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash3"></i><b> Eliminar cuenta</b>
+                        </a>                        
+                    </tr>
+                </div>
+            </table>
+        </div>
+
+        <!-- Segundo contenedor-->
+        <div class="pantallaChef-container">
+            <div class="pantallaChef-encabezado">
+                <!-- Fila encabezado-->
+                <div class="row">
+
+                    <div class="col-md-12 text-center">
+                        <h3><i class="bi bi-table"></i> Pedidos</h3>
+                        <hr>
+                    </div>
+                    
+                </div>
+
+                <!--Fila contenido-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-stripped">
+                                <thead>
+                                    <tr>
+                                        <th>Id Pedido</th>
+                                        <th>Mesa</th>
+                                        <th>Platillo</th>
+                                        <th>Estatus</th>
+                                        <th>Mesero a cargo</th>
+                                        <th>Fecha de ingreso</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for a in tblPedido %}
+                                    <tr>
+                                        <td>{{a.IdPedido }}</td>
+                                        <td>{{a.Mesa}}</td>
+                                        <td>{{a.Platillo}}</td>
+                                        <td>{{a.Estatus}}</td>
+                                        <td>{{a.UsuarioRegistro.Nombre}}</td>
+                                        <td>{{a.FechaFormateada}}</td>
+                                        <td>
+                                            <a href="/aceptarPedido/{{pedido.IdPedido}}" class="btn btn-success btn-sm">Aceptar pedido</a>
+                                            <p id="txtAceptado"><i class="bi bi-check2"></i>&nbsp;Pedido aceptado</>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

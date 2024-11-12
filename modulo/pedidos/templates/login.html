@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es-mx" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #37eb9c, rgba(70, 120, 90, 0.7));
+        }
+        .login-container {
+            max-width: 400px;
+            width: 100%;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #007bff;
+        }
+        .login-encabezado {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .circulo {
+            border: solid 2px;
+            border-color: black;
+            border-radius: 50%;
+            margin-left: 105px;
+            margin-right: 105px;
+            background-color: green;
+        }
+        .fa-utensils {
+            color: black;
+            margin-bottom: 40px;
+            font-size: 45px;
+        }
+        .btn {
+            border: solid 2px;
+            border-color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-encabezado">
+            <h3>
+                <div class="circulo">
+                    <br>
+                    <i class="fas fa-utensils me-2"></i>
+                </div>
+                <br>Iniciar Sesión</h3>
+        </div>
+        <form method="POST" action="{% url 'redireccion' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="txtCuenta" class="form-label"><i class="fas fa-envelope"></i> Cuenta</label>
+                <input type="email" class="form-control" id="txtCuenta" name="txtCuenta" placeholder="correo@dominio.com" required>
+            </div>
+            <div class="mb-3">
+                <label for="txtcontrasena" class="form-label"><i class="fas fa-lock"></i> Contraseña</label>
+                <input type="password" class="form-control" id="txtcontrasena" name="txtContrasena" placeholder="Ingrese su contraseña" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
+            
+            <!-- Agregar el botón de Registrarse -->
+            <p class="text-center mt-2">
+                <a href="{% url 'registro' %}" class="btn btn-danger w-100">¿No tienes cuenta? Regístrate</a>
+            </p>
+        </form>
+    </div>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    </body>
+    
+</html>
